@@ -19,7 +19,7 @@ import codecs
 
 def write_config(config, filename):
     with open(filename, 'w') as fout:
-        for k, v in config.iteritems():
+        for k, v in config.items():
             fout.write("%s %s\n" % (k, str(v)))
 
 
@@ -40,9 +40,9 @@ def main(config):
         param_print += ind + "-" + str(config[ind]) + "-"
 
     if not config["test"]:
-        config['dump_dir'] = "../obj/twoz_%s_time-%s/" % (param_print, time.strftime("%y.%m.%d_%H.%M.%S"))
+        config['dump_dir'] = "obj/twoz_%s_time-%s/" % (param_print, time.strftime("%y.%m.%d_%H.%M.%S"))
         if debug:
-            config['dump_dir'] = "../obj/debug/"
+            config['dump_dir'] = "obj/debug/"
         else:
             os.mkdir(config['dump_dir'])
 
@@ -62,7 +62,10 @@ def main(config):
     check_att = False
 
     logging.info("Process data.....")
-    voc_size, class_num, label_list, ix_to_char, ix_to_label, ix_to_tag, x_test_src, x_test_tgt, y_test_tgt = data_sup.preprocess(config["add_uns"])
+    #print(data_sup.preprocess(config["add_uns"]).decode('utf-8'))
+
+    #return voc_size, class_num, label_list, ix_to_char, ix_to_label, x_test_src, x_test_tgt, y_test_tgt
+    voc_size, class_num, label_list, ix_to_char, ix_to_label, x_test_src, x_test_tgt, y_test_tgt = data_sup.preprocess(config["add_uns"])
     logging.info("Done.")
 
     logging.info(ix_to_char)
@@ -458,7 +461,8 @@ if __name__ == "__main__":
     config['index_options'] = ['word_dropout', "y_dense_p_dim", "lang", "cross_only", "only_sup", "kl_thres", "dt_uns", "add_uns"]
     config['lang'] = args.lang
     data_sup.lang = args.lang
-    print "language:", data_sup.lang
+    #print("language:", str(data_sup.lang))
+    #print(data_sup.lang)
     config['reload'] = args.reload
     config['loadfrom'] = args.loadfrom
     config['has_ly_src'] = False

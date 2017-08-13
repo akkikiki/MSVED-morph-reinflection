@@ -1,7 +1,8 @@
 __author__ = 'jiataogu'
 import numpy as np
 import numpy.random as rng
-import cPickle
+#import cPickle
+import pickle as cPickle
 import pprint
 import sys
 
